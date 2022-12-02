@@ -2,21 +2,40 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
-  word: string
+  words: string[]
 }
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const words = [
+  const allWords = [
     "moeda",
     "servo",
     "porta",
     "casco",
     "livro",
-    "abrir"
+    "nobre",
+    "vigor",
+    "poder",
+    "casal",
+    "amigo",
+    "tempo",
+    "comum",
+    "Furia",
+    "ordem",
+    "heroi",
+    "burro",
+    "morte",
+    "calma",
+    "fardo"
   ]
-  let randomWord = words[Math.floor(Math.random() * words.length)]
-  res.status(200).json({ word: randomWord })
+
+  let wordsToGuest = []
+
+  for (let index = 0; index < 10; index++) {
+    let randomWord = allWords[Math.floor(Math.random() * allWords.length)]
+    wordsToGuest.push(randomWord)
+  }
+  res.status(200).json({ words: wordsToGuest })
 }

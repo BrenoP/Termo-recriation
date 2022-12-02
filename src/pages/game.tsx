@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import Header from '../components/Header/Header';
 
 type Props = {
-  props: { word: string } 
+  props: { words: string[] } 
 }
 
 const Game = ({ props }: Props) => {
@@ -31,7 +31,7 @@ const Game = ({ props }: Props) => {
       {/* <p>palavra: { props.word }</p> */}
       <Header />
       <BoardGrid rows={rows} />
-      <Keyboard word={props.word} />
+      <Keyboard word={props.words[0]} />
     </>
   )
 }
