@@ -3,19 +3,22 @@ import InputLetter from '../components/InputLetter/InputLetter';
 
 const Game: NextPage = () => {
 
-  const tries = 3;
+  const tries = 5;
+  const words_max = 5;
+
+  const rows = new Array(tries).fill(new Array(words_max).fill("a"))
 
   return (
     <div>
       <h1>Jogo</h1>
       {
-        [1, 2, 3, 4, 5].map(element => (
-          <div key={element}>
-            <InputLetter />
-            <InputLetter />
-            <InputLetter />
-            <InputLetter />
-            <InputLetter />
+        rows.map((row, index) => (
+          <div key={index}>
+            {
+              row.map((element: any) => 
+                <InputLetter key={element} />
+              )
+            }
           </div>
         ))
       }

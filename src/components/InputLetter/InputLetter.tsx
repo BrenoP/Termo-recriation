@@ -1,8 +1,10 @@
 import { Letter } from './InputLetter.styles';
  
-const InputLetter = () => {
+const InputLetter = ({
+  autoFocus
+}: any) => {
   return (
-    <Letter type="text" />
+    <Letter type="text" autoFocus={autoFocus} />
   )
 }
 
