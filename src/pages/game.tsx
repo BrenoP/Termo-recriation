@@ -15,8 +15,10 @@ const Game: NextPage = () => {
         rows.map((row, index) => (
           <div key={index}>
             {
-              row.map((element: any) => 
-                <InputLetter key={element} />
+              row.map((element: any, rowIndex: any) => 
+                <>
+                  <InputLetter key={element} column={index} row={rowIndex} />
+                </>
               )
             }
           </div>
