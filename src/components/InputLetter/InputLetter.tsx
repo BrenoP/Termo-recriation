@@ -6,7 +6,7 @@ const InputLetter = ({
   row
 }: any) => {
   return (
-    <Letter type="text" autoFocus={autoFocus} maxLength={1} value={column + "-" + row} readOnly />
+    <Letter type="text" autoFocus={autoFocus} maxLength={1} />
   )
 }
 
