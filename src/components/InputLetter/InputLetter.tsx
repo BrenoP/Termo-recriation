@@ -1,12 +1,21 @@
 import { Letter } from './InputLetter.styles';
- 
+import { useGame } from '../../providers/game';
+
 const InputLetter = ({
-  autoFocus,
   column,
   row
 }: any) => {
+
+  const { board, setBoard } : any = useGame();
+
   return (
-    <Letter type="text" autoFocus={autoFocus} maxLength={1} />
+    <Letter 
+      onChange={() => {
+        setBoard(...board, )
+      }}
+    >
+      {board[column][row]}
+    </Letter>
   )
 }
 

@@ -5,7 +5,7 @@ export const GameContext = React.createContext({});
 export function GameProvider(props: any) {
   const [board, setBoard] = useState([
     ["", "", "", "", ""],
-    ["", "", "", "", ""],
+    ["a", "b", "c", "d", "e"],
     ["", "", "", "", ""],
     ["", "", "", "", ""],
     ["", "", "", "", ""]

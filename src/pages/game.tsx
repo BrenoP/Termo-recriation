@@ -3,7 +3,8 @@ import { useContext } from 'react';
 import axios from 'axios';
 
 import InputLetter from '../components/InputLetter/InputLetter';
-import { GameContext } from '../providers/game';
+import BoardGrid from '../components/BoardGrid/BoardGrid';
+import { GameContext, useGame } from '../providers/game';
 
 const Game = ({ props }: any) => {
 
@@ -12,10 +13,8 @@ const Game = ({ props }: any) => {
 
   const rows = new Array(tries).fill(new Array(words_max).fill("a"))
 
-  const { board, setBoard } : any = useContext(GameContext);
+  const { board, setBoard } : any = useGame();
 
-
-  console.log(props.word)
   console.log(board)
 
   return (
@@ -24,7 +23,7 @@ const Game = ({ props }: any) => {
       <p>palavra: { props.word }</p>
       {
         rows.map((row, index) => (
-          <div key={index}>
+          <BoardGrid key={index}>
             {
               row.map((element: any, rowIndex: any) => 
                 <>
@@ -32,7 +31,7 @@ const Game = ({ props }: any) => {
                 </>
               )
             }
-          </div>
+          </BoardGrid>
         ))
       }
     </div>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const Letter = styled.input`
+export const Letter = styled.div`
   width: 60px;
   height: 60px;
-  margin: 1rem;
+  border: 1px solid black;
 `;
