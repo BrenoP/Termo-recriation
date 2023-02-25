@@ -1,10 +1,10 @@
 import type { GetStaticProps } from 'next';
-import { useContext } from 'react';
 import axios from 'axios';
 
+import { useGame } from '../providers/game';
 import InputLetter from '../components/InputLetter/InputLetter';
 import BoardGrid from '../components/BoardGrid/BoardGrid';
-import { GameContext, useGame } from '../providers/game';
+import Keyboard from '../components/Keyboard/Keyboard';
 
 const Game = ({ props }: any) => {
 
@@ -34,6 +34,7 @@ const Game = ({ props }: any) => {
           </BoardGrid>
         ))
       }
+      <Keyboard />
     </div>
   )
 }

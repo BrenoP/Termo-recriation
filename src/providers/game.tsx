@@ -3,9 +3,13 @@ import React, { useState } from "react";
 export const GameContext = React.createContext({});
 
 export function GameProvider(props: any) {
+  const [boardAttempt, setBoardAttempt] = useState({
+    column: 0,
+    row: 0
+  })
   const [board, setBoard] = useState([
     ["", "", "", "", ""],
-    ["a", "b", "c", "d", "e"],
+    ["", "", "", "", ""],
     ["", "", "", "", ""],
     ["", "", "", "", ""],
     ["", "", "", "", ""]
@@ -15,7 +19,9 @@ export function GameProvider(props: any) {
     <GameContext.Provider 
       value={{ 
         board, 
-        setBoard
+        setBoard,
+        boardAttempt, 
+        setBoardAttempt
       }}
     >
       {props.children}
