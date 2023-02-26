@@ -12,7 +12,7 @@ export default function handler(
   const words = [
     "moeda",
     "servo",
-    "quinto"
+    "porta"
   ]
   let randomWord = words[Math.floor(Math.random() * words.length)]
   res.status(200).json({ word: randomWord })

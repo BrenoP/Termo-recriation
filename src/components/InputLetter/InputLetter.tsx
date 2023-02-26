@@ -6,14 +6,10 @@ const InputLetter = ({
   row
 }: any) => {
 
-  const { board, setBoard } : any = useGame();
+  const { board } : any = useGame();
 
   return (
-    <Letter 
-      onChange={() => {
-        setBoard(...board, )
-      }}
-    >
+    <Letter>
       {board[column][row]}
     </Letter>
   )

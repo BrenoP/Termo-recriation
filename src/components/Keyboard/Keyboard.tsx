@@ -2,27 +2,32 @@ import { useEffect, useCallback } from 'react';
 import { KeyGrids, Key } from './Keyboard.style';
 import { useGame } from '../../providers/game';
 
-const Keyboard = () => {
+const Keyboard = ({ word }: any) => {
 
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
   const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
-  const { board, setBoard, boardAttempt, setBoardAttempt } : any = useGame();
-
-  function deleteKey() {
-    const newBoard = [...board]
-    newBoard[boardAttempt.column][boardAttempt.row] = ""
-    setBoard(newBoard)
-    setBoardAttempt({
-      column: 0,
-      row: boardAttempt.row - 1
-    })
-  }
+  const { 
+    setCorrectAnswer,
+    board, 
+    setBoard, 
+    boardAttempt, 
+    setBoardAttempt
+  } : any = useGame();
 
   const handleKeyboard = useCallback(
     (event: any) => {
-      if (event.key === "Backspace") {
+      if (event.key === "Enter" && board[boardAttempt.column].length > 4) {
+        let writenWord = board[boardAttempt.column].join().replaceAll(',', '').toLowerCase()
+        console.log(writenWord)
+        console.log(writenWord === word ? 'Acertou' : 'Errouuuu')
+        if(writenWord === word) {
+          setCorrectAnswer(true)
+        } else {
+          nextLine()
+        }
+      } else if (event.key === "Backspace") {
         deleteKey()
       }
     },
@@ -37,13 +42,30 @@ const Keyboard = () => {
     };
   }, [handleKeyboard]);
 
+  function nextLine() {
+    setBoardAttempt({
+      column: boardAttempt.column + 1,
+      row: 0
+    })
+  }
+
   function PressKey(key: string) {
     const newBoard = [...board]
     newBoard[boardAttempt.column][boardAttempt.row] = key
     setBoard(newBoard)
     setBoardAttempt({
-      column: 0,
+      column: boardAttempt.column,
       row: boardAttempt.row + 1
+    })
+  }
+
+  function deleteKey() {
+    const newBoard = [...board]
+    newBoard[boardAttempt.column][boardAttempt.row] = ""
+    setBoard(newBoard)
+    setBoardAttempt({
+      column: boardAttempt.column,
+      row: boardAttempt.row - 1
     })
   }
 

@@ -5,6 +5,7 @@ import { useGame } from '../providers/game';
 import InputLetter from '../components/InputLetter/InputLetter';
 import BoardGrid from '../components/BoardGrid/BoardGrid';
 import Keyboard from '../components/Keyboard/Keyboard';
+import { useEffect } from 'react';
 
 const Game = ({ props }: any) => {
 
@@ -13,9 +14,13 @@ const Game = ({ props }: any) => {
 
   const rows = new Array(tries).fill(new Array(words_max).fill("a"))
 
-  const { board, setBoard } : any = useGame();
+  const { correctAnswer } : any = useGame();
 
-  console.log(board)
+  useEffect(() => {
+    if(correctAnswer) {
+      alert('Você venceu')
+    }
+  }, [correctAnswer]);
 
   return (
     <div>
@@ -34,7 +39,7 @@ const Game = ({ props }: any) => {
           </BoardGrid>
         ))
       }
-      <Keyboard />
+      <Keyboard word={props.word} />
     </div>
   )
 }
