@@ -16,6 +16,8 @@ const Keyboard = ({ word }: any) => {
     setBoardAttempt
   } : any = useGame();
 
+  console.log(board)
+
   const handleKeyboard = useCallback(
     (event: any) => {
       if (event.key === "Enter" && board[boardAttempt.column].length > 4) {
@@ -60,7 +62,7 @@ const Keyboard = ({ word }: any) => {
 
   function PressKey(key: string) {
     const newBoard = [...board]
-    newBoard[boardAttempt.column][boardAttempt.row] = key
+    newBoard[boardAttempt.column][boardAttempt.row].letter = key
     setBoard(newBoard)
     const nextRow = boardAttempt.row < 4 ? boardAttempt.row + 1 : boardAttempt.row
     setBoardAttempt({
@@ -81,7 +83,8 @@ const Keyboard = ({ word }: any) => {
   }
 
   function enterKey() {
-    let writenWord = board[boardAttempt.column].join().replaceAll(',', '').toLowerCase()
+    let arrayOfLetters = board[boardAttempt.column].map((row: any) => row.letter)
+    let writenWord = arrayOfLetters.join().replaceAll(',', '').toLowerCase()
     console.log(writenWord)
     console.log(writenWord === word ? 'Acertou' : 'Errouuuu')
     if(writenWord === word) {

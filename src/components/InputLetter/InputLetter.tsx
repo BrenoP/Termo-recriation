@@ -17,7 +17,7 @@ const InputLetter = ({
 
   return (
     <Letter hasCursor={cursor} onClick={() => handleCursor()}>
-      {board[column][row]}
+      {board[column][row].letter}
       {(cursor) && <Cursor />}
     </Letter>
   )

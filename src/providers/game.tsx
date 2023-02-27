@@ -9,11 +9,41 @@ export function GameProvider(props: any) {
     row: 0
   })
   const [board, setBoard] = useState([
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""]
+    [
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}
+    ],
+    [
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}
+    ],
+    [
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}
+    ],
+    [
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}
+    ],
+    [
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}, 
+      { letter: "", color: ""}
+    ]
   ]);
 
   return (
