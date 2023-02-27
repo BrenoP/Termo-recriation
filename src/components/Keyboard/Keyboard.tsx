@@ -19,16 +19,25 @@ const Keyboard = ({ word }: any) => {
   const handleKeyboard = useCallback(
     (event: any) => {
       if (event.key === "Enter" && board[boardAttempt.column].length > 4) {
-        let writenWord = board[boardAttempt.column].join().replaceAll(',', '').toLowerCase()
-        console.log(writenWord)
-        console.log(writenWord === word ? 'Acertou' : 'Errouuuu')
-        if(writenWord === word) {
-          setCorrectAnswer(true)
-        } else {
-          nextLine()
-        }
+        enterKey()
       } else if (event.key === "Backspace") {
         deleteKey()
+      } else {
+        keys1.forEach((key) => {
+          if (event.key.toLowerCase() === key.toLowerCase()) {
+            PressKey(key);
+          }
+        });
+        keys2.forEach((key) => {
+          if (event.key.toLowerCase() === key.toLowerCase()) {
+            PressKey(key);
+          }
+        });
+        keys3.forEach((key) => {
+          if (event.key.toLowerCase() === key.toLowerCase()) {
+            PressKey(key);
+          }
+        });
       }
     },
     [boardAttempt]
@@ -50,7 +59,6 @@ const Keyboard = ({ word }: any) => {
   }
 
   function PressKey(key: string) {
-    debugger
     const newBoard = [...board]
     newBoard[boardAttempt.column][boardAttempt.row] = key
     setBoard(newBoard)
@@ -70,6 +78,17 @@ const Keyboard = ({ word }: any) => {
       column: boardAttempt.column,
       row: nextRow
     })
+  }
+
+  function enterKey() {
+    let writenWord = board[boardAttempt.column].join().replaceAll(',', '').toLowerCase()
+    console.log(writenWord)
+    console.log(writenWord === word ? 'Acertou' : 'Errouuuu')
+    if(writenWord === word) {
+      setCorrectAnswer(true)
+    } else {
+      nextLine()
+    }
   }
 
   return ( 
