@@ -1,4 +1,4 @@
-import { Letter } from './InputLetter.styles';
+import { Letter, Cursor } from './InputLetter.styles';
 import { useGame } from '../../providers/game';
 
 const InputLetter = ({
@@ -6,11 +6,19 @@ const InputLetter = ({
   row
 }: any) => {
 
-  const { board } : any = useGame();
+  const { board, boardAttempt, setBoardAttempt } : any = useGame();
+  const cursor = boardAttempt.column === column && boardAttempt.row === row;
+
+  function handleCursor() {
+    if(boardAttempt.column === column) {
+      setBoardAttempt({ column: boardAttempt.column, row: row })
+    }
+  }
 
   return (
-    <Letter>
+    <Letter hasCursor={cursor} onClick={() => handleCursor()}>
       {board[column][row]}
+      {(cursor) && <Cursor />}
     </Letter>
   )
 }

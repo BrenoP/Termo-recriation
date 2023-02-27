@@ -50,12 +50,14 @@ const Keyboard = ({ word }: any) => {
   }
 
   function PressKey(key: string) {
+    debugger
     const newBoard = [...board]
     newBoard[boardAttempt.column][boardAttempt.row] = key
     setBoard(newBoard)
+    const nextRow = boardAttempt.row < 4 ? boardAttempt.row + 1 : boardAttempt.row
     setBoardAttempt({
       column: boardAttempt.column,
-      row: boardAttempt.row + 1
+      row: nextRow
     })
   }
 
@@ -63,9 +65,10 @@ const Keyboard = ({ word }: any) => {
     const newBoard = [...board]
     newBoard[boardAttempt.column][boardAttempt.row] = ""
     setBoard(newBoard)
+    const nextRow = boardAttempt.row > 0 ? boardAttempt.row - 1 : boardAttempt.row
     setBoardAttempt({
       column: boardAttempt.column,
-      row: boardAttempt.row - 1
+      row: nextRow
     })
   }
 
