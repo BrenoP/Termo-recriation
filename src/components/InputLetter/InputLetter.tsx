@@ -16,7 +16,7 @@ const InputLetter = ({
   }
 
   return (
-    <Letter hasCursor={cursor} onClick={() => handleCursor()}>
+    <Letter color={board[column][row].color} hasCursor={cursor} onClick={() => handleCursor()}>
       {board[column][row].letter}
       {(cursor) && <Cursor />}
     </Letter>

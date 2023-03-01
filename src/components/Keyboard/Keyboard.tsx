@@ -53,7 +53,28 @@ const Keyboard = ({ word }: any) => {
     };
   }, [handleKeyboard]);
 
+  // PONTO DE MELHORIA 
   function nextLine() {
+    let writenWord = board[boardAttempt.column].map((row: any) => row)
+    let correctWordArray = word.split('')
+    for (let index = 0; index < writenWord.length; index++) {
+      const newBoard = [...board]
+      const writenLetter = writenWord[index].letter.toLowerCase()
+
+      if(writenLetter === correctWordArray[index]) {
+        console.log(writenWord[index].letter + " é verde")
+        newBoard[boardAttempt.column][index].color = "green"
+      } else {
+        console.log(correctWordArray.includes(writenLetter))
+        if(correctWordArray.includes(writenLetter)) {
+          newBoard[boardAttempt.column][index].color = "yellow"
+        } else {
+          console.log(writenLetter + " é cinza")
+          newBoard[boardAttempt.column][index].color = "gray"
+        }
+      } 
+      setBoard(newBoard)
+    }
     setBoardAttempt({
       column: boardAttempt.column + 1,
       row: 0
@@ -72,14 +93,16 @@ const Keyboard = ({ word }: any) => {
   }
 
   function deleteKey() {
-    const newBoard = [...board]
-    newBoard[boardAttempt.column][boardAttempt.row] = ""
-    setBoard(newBoard)
-    const nextRow = boardAttempt.row > 0 ? boardAttempt.row - 1 : boardAttempt.row
-    setBoardAttempt({
-      column: boardAttempt.column,
-      row: nextRow
-    })
+    if(board[boardAttempt.column][boardAttempt.row].letter !== "") {
+      const newBoard = [...board]
+      newBoard[boardAttempt.column][boardAttempt.row] = ""
+      setBoard(newBoard)
+      const nextRow = boardAttempt.row > 0 ? boardAttempt.row - 1 : boardAttempt.row
+      setBoardAttempt({
+        column: boardAttempt.column,
+        row: nextRow
+      })
+    }
   }
 
   function enterKey() {

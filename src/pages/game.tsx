@@ -25,7 +25,7 @@ const Game = ({ props }: any) => {
   return (
     <div>
       <h1>Jogo</h1>
-      <p>palavra: { props.word }</p>
+      {/* <p>palavra: { props.word }</p> */}
       {
         rows.map((row, index) => (
           <BoardGrid key={index}>

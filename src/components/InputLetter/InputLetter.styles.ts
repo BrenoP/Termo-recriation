@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
 type LetterProps = {
-  hasCursor: boolean
+  hasCursor: boolean,
+  color: string
 }
 
 export const Letter = styled.div<LetterProps>`
   width: 60px;
   height: 60px;
   border: 1px solid black;
+  background-color: ${(props) => props.color};
   cursor: pointer;
 
   ${(props) => props.hasCursor && `
