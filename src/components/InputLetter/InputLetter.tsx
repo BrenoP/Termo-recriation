@@ -16,9 +16,14 @@ const InputLetter = ({
   }
 
   return (
-    <Letter color={board[column][row].color} hasCursor={cursor} onClick={() => handleCursor()}>
+    <Letter 
+      color={board[column][row].color} 
+      hasLetter={board[column][row].letter !== ""}
+      hasCursor={cursor} 
+      onClick={() => handleCursor()}
+    >
       {board[column][row].letter}
-      {(cursor) && <Cursor />}
+      {(cursor) && <Cursor hasLetter={board[column][row].letter !== ""} />}
     </Letter>
   )
 }

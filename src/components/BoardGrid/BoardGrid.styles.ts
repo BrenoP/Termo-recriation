@@ -1,7 +1,16 @@
 import styled from "styled-components";
 
+export const Board = styled.section`
+  display: flex;
+  justify-content: center;
+  margin: 4rem 0;
+`;
+
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 0%;
+  grid-template-rows: repeat(5,1fr);
+`;
+
+export const Column = styled.div`
+  display: flex;
 `;

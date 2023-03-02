@@ -45,6 +45,7 @@ export function GameProvider(props: any) {
       {letter: "", color: ""}
     ]
   ]);
+  const [disabledLetters, setDisabledLetters] = useState([]);
 
   return (
     <GameContext.Provider 
@@ -54,7 +55,9 @@ export function GameProvider(props: any) {
         board, 
         setBoard,
         boardAttempt, 
-        setBoardAttempt
+        setBoardAttempt,
+        disabledLetters, 
+        setDisabledLetters
       }}
     >
       {props.children}

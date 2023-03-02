@@ -1,25 +1,26 @@
 import { useEffect, useCallback } from 'react';
 import { KeyGrids, Key } from './Keyboard.style';
+
 import { useGame } from '../../providers/game';
 
 const Keyboard = ({ word }: any) => {
 
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-  const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-  const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
+  const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "⌫"];
+  const keys3 = ["Z", "X", "C", "V", "B", "N", "M", "Enter"];
 
   const { 
     setCorrectAnswer,
     board, 
     setBoard, 
     boardAttempt, 
-    setBoardAttempt
+    setBoardAttempt,
   } : any = useGame();
 
-  console.log(board)
+  console.log(word)
 
   const handleKeyboard = useCallback(
-    (event: any) => {
+    (event: KeyboardEvent) => {
       if (event.key === "Enter" && board[boardAttempt.column].length > 4) {
         enterKey()
       } else if (event.key === "Backspace") {
@@ -63,14 +64,14 @@ const Keyboard = ({ word }: any) => {
 
       if(writenLetter === correctWordArray[index]) {
         console.log(writenWord[index].letter + " é verde")
-        newBoard[boardAttempt.column][index].color = "green"
+        newBoard[boardAttempt.column][index].color = "#3AA394"
       } else {
         console.log(correctWordArray.includes(writenLetter))
         if(correctWordArray.includes(writenLetter)) {
-          newBoard[boardAttempt.column][index].color = "yellow"
+          newBoard[boardAttempt.column][index].color = "#D3AD69"
         } else {
           console.log(writenLetter + " é cinza")
-          newBoard[boardAttempt.column][index].color = "gray"
+          newBoard[boardAttempt.column][index].color = "#2B2B37"
         }
       } 
       setBoard(newBoard)
@@ -93,17 +94,24 @@ const Keyboard = ({ word }: any) => {
   }
 
   function deleteKey() {
-    if(board[boardAttempt.column][boardAttempt.row].letter === "" && boardAttempt.row === 0) {
-      return
-    } else {
+    function eraseWord(backOneRow: boolean) {
       const newBoard = [...board]
-      newBoard[boardAttempt.column][boardAttempt.row] = {letter: "", color: ""}
+      newBoard[boardAttempt.column][backOneRow ? boardAttempt.row - 1 : boardAttempt.row] = {letter: "", color: ""}
       setBoard(newBoard)
       const nextRow = boardAttempt.row > 0 ? boardAttempt.row - 1 : boardAttempt.row
       setBoardAttempt({
         column: boardAttempt.column,
         row: nextRow
       })
+    }
+
+    if(board[boardAttempt.column][boardAttempt.row].letter === "") {
+      if(boardAttempt.row === 0) {
+        return
+      }
+      eraseWord(true)
+    } else {
+      eraseWord(false)
     }
   }
 
@@ -120,20 +128,21 @@ const Keyboard = ({ word }: any) => {
   }
 
   return ( 
-    <>
-      <h1>Keyboard</h1>
-      <KeyGrids>
-        <div className='key-row'>
-          {keys1.map((key, index) => (<Key key={index} onClick={() => PressKey(key)}>{key}</Key>))}
-        </div>
-        <div className='key-row'>
-          {keys2.map((key, index) => (<Key key={index} onClick={() => PressKey(key)}>{key}</Key>))}
-        </div>
-        <div className='key-row'> 
-          {keys3.map((key, index) => (<Key key={index} onClick={() => PressKey(key)}>{key}</Key>))}
-        </div>
-      </KeyGrids>
-    </>
+    <KeyGrids>
+      <div className='key-row'>
+        {keys1.map((key, index) => (<Key key={index} onClick={() => PressKey(key)}>{key}</Key>))}
+      </div>
+      <div className='key-row'>
+        {keys2.map((key, index) => (
+          <Key key={index} onClick={() => key === "⌫" ? deleteKey() : PressKey(key)}>{key}</Key>
+        ))}
+      </div>
+      <div className='key-row'> 
+        {keys3.map((key, index) => (
+          <Key key={index} onClick={() => key === "Enter" ? nextLine() : PressKey(key)}>{key}</Key>
+        ))}
+      </div>
+    </KeyGrids>
   );
 }
  

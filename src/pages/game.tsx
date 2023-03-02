@@ -1,4 +1,4 @@
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import axios from 'axios';
 
 import { useGame } from '../providers/game';
@@ -7,7 +7,11 @@ import BoardGrid from '../components/BoardGrid/BoardGrid';
 import Keyboard from '../components/Keyboard/Keyboard';
 import { useEffect } from 'react';
 
-const Game = ({ props }: any) => {
+type Props = {
+  props: { word: string } 
+}
+
+const Game = ({ props }: Props) => {
 
   const tries = 5;
   const words_max = 5;
@@ -23,24 +27,11 @@ const Game = ({ props }: any) => {
   }, [correctAnswer]);
 
   return (
-    <div>
-      <h1>Jogo</h1>
+    <>
       {/* <p>palavra: { props.word }</p> */}
-      {
-        rows.map((row, index) => (
-          <BoardGrid key={index}>
-            {
-              row.map((element: any, rowIndex: any) => 
-                <>
-                  <InputLetter key={element} column={index} row={rowIndex} />
-                </>
-              )
-            }
-          </BoardGrid>
-        ))
-      }
+      <BoardGrid rows={rows} />
       <Keyboard word={props.word} />
-    </div>
+    </>
   )
 }
 

@@ -1,10 +1,26 @@
-import { Grid } from './BoardGrid.styles';
+import { Board, Grid, Column } from './BoardGrid.styles';
+import { BoardGridProps } from './BoardGrid.interface';
 
-const BoardGrid = ({children}: any) => {
+import InputLetter from '../InputLetter/InputLetter';
+
+const BoardGrid = ({ rows }: BoardGridProps) => {
+
   return (
-    <Grid>
-      {children}
-    </Grid>
+    <Board>
+      <Grid>
+        {
+          rows.map((row, index) => (
+            <Column key={index}>
+              {
+                row.map((element: any, rowIndex: any) => 
+                  <InputLetter key={element} column={index} row={rowIndex} />
+                )
+              }
+            </Column>
+          ))
+        }
+      </Grid>
+    </Board>
   ) 
 }
 
