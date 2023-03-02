@@ -71,7 +71,7 @@ const Keyboard = ({ word }: any) => {
           newBoard[boardAttempt.column][index].color = "#D3AD69"
         } else {
           console.log(writenLetter + " é cinza")
-          newBoard[boardAttempt.column][index].color = "#2B2B37"
+          newBoard[boardAttempt.column][index].color = "#505356"
         }
       } 
       setBoard(newBoard)

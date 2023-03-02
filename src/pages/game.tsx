@@ -2,10 +2,10 @@ import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import axios from 'axios';
 
 import { useGame } from '../providers/game';
-import InputLetter from '../components/InputLetter/InputLetter';
 import BoardGrid from '../components/BoardGrid/BoardGrid';
 import Keyboard from '../components/Keyboard/Keyboard';
 import { useEffect } from 'react';
+import Header from '../components/Header/Header';
 
 type Props = {
   props: { word: string } 
@@ -16,7 +16,7 @@ const Game = ({ props }: Props) => {
   const tries = 5;
   const words_max = 5;
 
-  const rows = new Array(tries).fill(new Array(words_max).fill("a"))
+  const rows = new Array(tries).fill(new Array(words_max).fill({letter: "", color: ""}))
 
   const { correctAnswer } : any = useGame();
 
@@ -29,6 +29,7 @@ const Game = ({ props }: Props) => {
   return (
     <>
       {/* <p>palavra: { props.word }</p> */}
+      <Header />
       <BoardGrid rows={rows} />
       <Keyboard word={props.word} />
     </>

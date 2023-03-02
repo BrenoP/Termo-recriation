@@ -2,8 +2,13 @@ import { Board, Grid, Column } from './BoardGrid.styles';
 import { BoardGridProps } from './BoardGrid.interface';
 
 import InputLetter from '../InputLetter/InputLetter';
+import { useGame } from '../../providers/game';
 
 const BoardGrid = ({ rows }: BoardGridProps) => {
+
+  const { boardAttempt } : any = useGame();
+
+  console.log(rows)
 
   return (
     <Board>
@@ -13,7 +18,7 @@ const BoardGrid = ({ rows }: BoardGridProps) => {
             <Column key={index}>
               {
                 row.map((element: any, rowIndex: any) => 
-                  <InputLetter key={element} column={index} row={rowIndex} />
+                  <InputLetter key={element} column={index} row={rowIndex} disabled={index > boardAttempt.column} />
                 )
               }
             </Column>

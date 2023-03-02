@@ -3,7 +3,8 @@ import styled from 'styled-components';
 type LetterProps = {
   hasCursor: boolean,
   hasLetter: boolean,
-  color: string
+  color: string,
+  disabled: boolean
 }
 
 type CursorProps = {
@@ -18,10 +19,13 @@ export const Letter = styled.div<LetterProps>`
   font-weight: 700;
   width: 70px;
   height: 70px;
-  border: 3px solid ${(props) => props.color === "#2B2B37" ? "#7C8389" : props.color};
+  ${(props) => props.disabled ? 
+    `opacity: .2;` : 
+    `border: 5px solid ${props.color === "#2B2B37" ? "#505356" : props.color};`
+  }
   border-radius: 5px;
   margin: 0.25rem;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.disabled ? "#7C8389" : props.color};
   cursor: pointer;
 
   ${(props) => props.hasLetter && `
@@ -36,16 +40,13 @@ export const Letter = styled.div<LetterProps>`
 
   @keyframes letter-on {
     0% {
-      width: 70px;
-      height: 70px;
+      font-size: 2.5rem;
     }
     50% {
-      width: 72px;
-      height: 72px;
+      font-size: 3.2rem;
     }
     100% {
-      width: 70px;
-      height: 70px;
+      font-size: 2.5rem;
     }
   }
 `;

@@ -1,10 +1,17 @@
 import { Letter, Cursor } from './InputLetter.styles';
 import { useGame } from '../../providers/game';
 
+type InputLetterProps = {
+  column: number,
+  row: number,
+  disabled: boolean
+}
+
 const InputLetter = ({
   column,
-  row
-}: any) => {
+  row,
+  disabled
+}: InputLetterProps) => {
 
   const { board, boardAttempt, setBoardAttempt } : any = useGame();
   const cursor = boardAttempt.column === column && boardAttempt.row === row;
@@ -20,6 +27,7 @@ const InputLetter = ({
       color={board[column][row].color} 
       hasLetter={board[column][row].letter !== ""}
       hasCursor={cursor} 
+      disabled={disabled}
       onClick={() => handleCursor()}
     >
       {board[column][row].letter}
