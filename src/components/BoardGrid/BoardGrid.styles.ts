@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Board = styled.section`
   display: flex;
   justify-content: center;
-  margin: 4rem 0;
+  margin: 2.5rem 0;
 `;
 
 export const Grid = styled.div`

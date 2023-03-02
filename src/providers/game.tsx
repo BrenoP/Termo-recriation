@@ -3,12 +3,22 @@ import React, { useState } from "react";
 export const GameContext = React.createContext({});
 
 export function GameProvider(props: any) {
+  const [wordOrder, setWordOrder] = useState(0);
+  const [time, setTime] = useState(15000);
+  const [points, setPoints] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(false);
   const [boardAttempt, setBoardAttempt] = useState({
     column: 0,
     row: 0
   })
   const [board, setBoard] = useState([
+    [
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}
+    ],
     [
       {letter: "", color: ""}, 
       {letter: "", color: ""}, 
@@ -57,7 +67,13 @@ export function GameProvider(props: any) {
         boardAttempt, 
         setBoardAttempt,
         disabledLetters, 
-        setDisabledLetters
+        setDisabledLetters,
+        wordOrder, 
+        setWordOrder,
+        time, 
+        setTime,
+        points, 
+        setPoints
       }}
     >
       {props.children}

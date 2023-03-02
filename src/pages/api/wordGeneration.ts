@@ -22,7 +22,7 @@ export default function handler(
     "amigo",
     "tempo",
     "comum",
-    "Furia",
+    "furia",
     "ordem",
     "heroi",
     "burro",

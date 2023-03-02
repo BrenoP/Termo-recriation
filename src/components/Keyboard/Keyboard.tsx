@@ -14,10 +14,8 @@ const Keyboard = ({ word }: any) => {
     board, 
     setBoard, 
     boardAttempt, 
-    setBoardAttempt,
+    setBoardAttempt
   } : any = useGame();
-
-  console.log(word)
 
   const handleKeyboard = useCallback(
     (event: KeyboardEvent) => {
@@ -56,30 +54,31 @@ const Keyboard = ({ word }: any) => {
 
   // PONTO DE MELHORIA 
   function nextLine() {
-    let writenWord = board[boardAttempt.column].map((row: any) => row)
-    let correctWordArray = word.split('')
-    for (let index = 0; index < writenWord.length; index++) {
-      const newBoard = [...board]
-      const writenLetter = writenWord[index].letter.toLowerCase()
-
-      if(writenLetter === correctWordArray[index]) {
-        console.log(writenWord[index].letter + " é verde")
-        newBoard[boardAttempt.column][index].color = "#3AA394"
-      } else {
-        console.log(correctWordArray.includes(writenLetter))
-        if(correctWordArray.includes(writenLetter)) {
-          newBoard[boardAttempt.column][index].color = "#D3AD69"
+    if(boardAttempt.column > 4) {
+      alert('perdeu o jogo')
+    } else {
+      let writenWord = board[boardAttempt.column].map((row: any) => row)
+      let correctWordArray = word.split('')
+      for (let index = 0; index < writenWord.length; index++) {
+        const newBoard = [...board]
+        const writenLetter = writenWord[index].letter.toLowerCase()
+  
+        if(writenLetter === correctWordArray[index]) {
+          newBoard[boardAttempt.column][index].color = "#3AA394"
         } else {
-          console.log(writenLetter + " é cinza")
-          newBoard[boardAttempt.column][index].color = "#505356"
-        }
-      } 
-      setBoard(newBoard)
+          if(correctWordArray.includes(writenLetter)) {
+            newBoard[boardAttempt.column][index].color = "#D3AD69"
+          } else {
+            newBoard[boardAttempt.column][index].color = "#505356"
+          }
+        } 
+        setBoard(newBoard)
+      }
+      setBoardAttempt({
+        column: boardAttempt.column + 1,
+        row: 0
+      })
     }
-    setBoardAttempt({
-      column: boardAttempt.column + 1,
-      row: 0
-    })
   }
 
   function PressKey(key: string) {
@@ -118,12 +117,12 @@ const Keyboard = ({ word }: any) => {
   function enterKey() {
     let arrayOfLetters = board[boardAttempt.column].map((row: any) => row.letter)
     let writenWord = arrayOfLetters.join().replaceAll(',', '').toLowerCase()
-    console.log(writenWord)
-    console.log(writenWord === word ? 'Acertou' : 'Errouuuu')
-    if(writenWord === word) {
-      setCorrectAnswer(true)
-    } else {
-      nextLine()
+    if(writenWord.length > 4) {
+      if(writenWord === word) {
+        setCorrectAnswer(true)
+      } else {
+        nextLine()
+      }
     }
   }
 
@@ -139,7 +138,7 @@ const Keyboard = ({ word }: any) => {
       </div>
       <div className='key-row'> 
         {keys3.map((key, index) => (
-          <Key key={index} onClick={() => key === "Enter" ? nextLine() : PressKey(key)}>{key}</Key>
+          <Key key={index} onClick={() => key === "Enter" ? enterKey() : PressKey(key)}>{key}</Key>
         ))}
       </div>
     </KeyGrids>

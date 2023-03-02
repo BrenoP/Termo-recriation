@@ -8,8 +8,6 @@ const BoardGrid = ({ rows }: BoardGridProps) => {
 
   const { boardAttempt } : any = useGame();
 
-  console.log(rows)
-
   return (
     <Board>
       <Grid>
