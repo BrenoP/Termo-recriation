@@ -10,39 +10,39 @@ export function GameProvider(props: any) {
   })
   const [board, setBoard] = useState([
     [
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}
     ],
     [
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}
     ],
     [
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}
     ],
     [
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}
     ],
     [
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}, 
-      { letter: "", color: ""}
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}, 
+      {letter: "", color: ""}
     ]
   ]);
 

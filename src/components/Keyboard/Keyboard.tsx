@@ -93,9 +93,11 @@ const Keyboard = ({ word }: any) => {
   }
 
   function deleteKey() {
-    if(board[boardAttempt.column][boardAttempt.row].letter !== "") {
+    if(board[boardAttempt.column][boardAttempt.row].letter === "" && boardAttempt.row === 0) {
+      return
+    } else {
       const newBoard = [...board]
-      newBoard[boardAttempt.column][boardAttempt.row] = ""
+      newBoard[boardAttempt.column][boardAttempt.row] = {letter: "", color: ""}
       setBoard(newBoard)
       const nextRow = boardAttempt.row > 0 ? boardAttempt.row - 1 : boardAttempt.row
       setBoardAttempt({
