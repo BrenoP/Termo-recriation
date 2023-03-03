@@ -10,19 +10,21 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   const allWords = [
+    "dardo",
+    "nobre",
+    "amigo",
+    "furia",
+    "casal",
+    "armas",
     "moeda",
     "servo",
     "porta",
     "casco",
     "livro",
-    "nobre",
     "vigor",
     "poder",
-    "casal",
-    "amigo",
     "tempo",
     "comum",
-    "furia",
     "ordem",
     "heroi",
     "burro",
@@ -31,11 +33,17 @@ export default function handler(
     "fardo"
   ]
 
-  let wordsToGuest = []
-
-  for (let index = 0; index < 10; index++) {
-    let randomWord = allWords[Math.floor(Math.random() * allWords.length)]
-    wordsToGuest.push(randomWord)
+  function shuffleArray(array: string[]) {
+    for (let i = 10 - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
   }
+
+  let wordsToGuest = shuffleArray(allWords).slice(0, 10)
+
+  // let wordsToGuest = allWords.slice(0, 10)
+
   res.status(200).json({ words: wordsToGuest })
 }

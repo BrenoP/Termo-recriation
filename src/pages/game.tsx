@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { useGame } from '../providers/game';
+import { generateWordSet } from '../providers/wordsSet';
+
 import BoardGrid from '../components/BoardGrid/BoardGrid';
 import Keyboard from '../components/Keyboard/Keyboard';
 import Header from '../components/Header/Header';
@@ -13,12 +15,13 @@ type Props = {
 
 const Game = ({ props }: Props) => {
 
-  const tries = 6;
-  const words_max = 5;
+  const tries = 6
+  const words_max = 5
 
   const rows = new Array(tries).fill(new Array(words_max).fill({letter: "", color: ""}))
 
-  const [time, setTime] = useState(120);
+  const [time, setTime] = useState(0)
+  const [wordSet, setWordSet] = useState(new Set())
 
   const { 
     correctAnswer, 
@@ -31,6 +34,10 @@ const Game = ({ props }: Props) => {
     boardAttempt,
     setBoardAttempt
   } : any = useGame();
+
+  useEffect(() => {
+    generateWordSet().then((res: any) => setWordSet(res.wordSet))
+  }, [])
 
   useEffect(() => {
     if(correctAnswer) {
@@ -125,14 +132,14 @@ const Game = ({ props }: Props) => {
 
   return (
     <>
-      {/* <p>palavra: { props.words[wordOrder] }</p> */}
+      <p>palavra: { props.words[wordOrder] }</p>
       <Header 
         time={time}
         wordOrder={wordOrder}
         points={points}
       />
       <BoardGrid rows={rows} />
-      <Keyboard word={props.words[wordOrder]} />
+      <Keyboard word={props.words[wordOrder]} wordSet={wordSet} />
     </>
   )
 }
