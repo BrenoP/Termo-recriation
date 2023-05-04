@@ -20,7 +20,7 @@ const Game = ({ props }: Props) => {
 
   const rows = new Array(tries).fill(new Array(words_max).fill({letter: "", color: ""}))
 
-  const [time, setTime] = useState(0)
+  const [time, setTime] = useState(120)
   const [wordSet, setWordSet] = useState(new Set())
 
   const { 
