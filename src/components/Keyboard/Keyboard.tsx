@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState, useRef } from 'react';
 import { KeyGrids, Key } from './Keyboard.style';
 
 import { useGame } from '../../providers/game';
@@ -20,6 +20,7 @@ const Keyboard = ({ word, wordSet }: any) => {
     boardAttempt, 
     setBoardAttempt
   } : any = useGame()
+  const audioRef = useRef(null);
 
   const handleKeyboard = useCallback(
     (event: KeyboardEvent) => {
@@ -162,6 +163,7 @@ const Keyboard = ({ word, wordSet }: any) => {
           setCorrectKey([])
           setDisabledKeys([])
           setPositionKey([])
+          audioRef.current && audioRef.current.play();
         } else {
           nextLine()
         }
@@ -173,6 +175,9 @@ const Keyboard = ({ word, wordSet }: any) => {
 
   return ( 
     <KeyGrids>
+      <audio ref={audioRef}>
+        <source src="../../assets/correct.wav" type="audio/wav" />
+      </audio>
       <div className='key-row'>
         {keys1.map((key, index) => (
           <Key 

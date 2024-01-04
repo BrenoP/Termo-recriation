@@ -880,6 +880,8 @@ bairu
 babas
 buxos
 cerne
+casco
+casca
 casal
 causa
 coser
