@@ -3,6 +3,8 @@ import { KeyGrids, Key } from './Keyboard.style';
 
 import { useGame } from '../../providers/game';
 
+import audio from '../../assets/correct.wav';
+
 const Keyboard = ({ word, wordSet }: any) => {
 
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
@@ -20,7 +22,6 @@ const Keyboard = ({ word, wordSet }: any) => {
     boardAttempt, 
     setBoardAttempt
   } : any = useGame()
-  const audioRef = useRef(null);
 
   const handleKeyboard = useCallback(
     (event: KeyboardEvent) => {
@@ -73,11 +74,13 @@ const Keyboard = ({ word, wordSet }: any) => {
       for (let index = 0; index < writenWord.length; index++) {
         const newBoard = [...board]
         const writenLetter: string = writenWord[index].letter.toLowerCase()
+
         if(writenLetter === correctWordArray[index]) {
           newBoard[boardAttempt.column][index].color = "#3AA394"
           const newArr = correctKey
           newArr.push(writenLetter)
           setCorrectKey(newArr)
+
           if(!hasDuplicates(correctWordArray) && positionKey.includes(writenLetter)) {
             newBoard[boardAttempt.column].map((row: any, rowIndex: any) => {
               if(row.letter.toLowerCase() === writenLetter && newBoard[boardAttempt.column][rowIndex].color !== "#3AA394") {
@@ -90,6 +93,7 @@ const Keyboard = ({ word, wordSet }: any) => {
         } else {
           if(correctWordArray.includes(writenLetter)) {
             let onlyLettersWrittenArray = writenWord.map((letter: any) => letter.letter.toLowerCase())
+
             if(
               (!hasDuplicates(correctWordArray) && correctKey.includes(writenLetter)) ||
               (
@@ -98,6 +102,7 @@ const Keyboard = ({ word, wordSet }: any) => {
               )
             ) {
               newBoard[boardAttempt.column][index].color = "#505356"
+
             } else {
               newBoard[boardAttempt.column][index].color = "#D3AD69"
               const newArr = positionKey
@@ -159,11 +164,11 @@ const Keyboard = ({ word, wordSet }: any) => {
     if(writenWord.length > 4) {
       if(wordSet.has(writenWord + '\r')) {
         if(writenWord === word) {
+          playAudioRight()
           setCorrectAnswer(true)
           setCorrectKey([])
           setDisabledKeys([])
           setPositionKey([])
-          audioRef.current && audioRef.current.play();
         } else {
           nextLine()
         }
@@ -173,11 +178,12 @@ const Keyboard = ({ word, wordSet }: any) => {
     } 
   }
 
+  function playAudioRight() {
+    new Audio(audio).play()
+  }
+
   return ( 
     <KeyGrids>
-      <audio ref={audioRef}>
-        <source src="../../assets/correct.wav" type="audio/wav" />
-      </audio>
       <div className='key-row'>
         {keys1.map((key, index) => (
           <Key 
